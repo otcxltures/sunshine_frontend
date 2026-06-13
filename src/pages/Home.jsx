@@ -22,7 +22,7 @@ export default function Home() {
         <div className="section-wrapper relative py-20 sm:py-28">
           <div className="max-w-2xl">
             <span className="inline-block bg-amber-500/20 text-amber-400 text-xs font-600 uppercase tracking-widest px-3 py-1 rounded-full mb-6">
-              Admissions Open 2025
+              Admissions Open 2026
             </span>
             <h1 className="font-display font-800 text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5">
               Bright Futures<br />
