@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, Users, Award, Clock } from 'lucide-react'
 import { useCourses } from '../hooks/useCourses'
 import CourseCard from '../components/ui/CourseCard'
 import Spinner from '../components/ui/Spinner'
+import EmptyState from '../components/ui/EmptyState'
 
 const stats = [
   { icon: BookOpen, value: '40+',  label: 'Courses Offered'  },
@@ -12,7 +13,7 @@ const stats = [
 ]
 
 export default function Home() {
-  const { courses, loading } = useCourses({ limit: 3 })
+  const { courses, loading, error } = useCourses({ limit: 3 })
 
   return (
     <>
@@ -35,8 +36,8 @@ export default function Home() {
               <Link to="/courses" className="btn-primary text-base px-6 py-3">
                 Browse Courses <ArrowRight size={18} />
               </Link>
-              <Link to="/about" className="btn-secondary text-base px-6 py-3">
-                Learn About Us
+              <Link to="/register" className="btn-secondary text-base px-6 py-3">
+                Apply Now
               </Link>
             </div>
           </div>
@@ -73,6 +74,13 @@ export default function Home() {
 
           {loading ? (
             <div className="flex justify-center py-12"><Spinner /></div>
+          ) : error ? (
+            <div className="py-12">
+              <EmptyState
+                title="Unable to load featured courses"
+                message={`Could not reach the API: ${error}. Start the backend or set VITE_API_URL.`}
+              />
+            </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {courses.map(c => <CourseCard key={c.id} course={c} />)}

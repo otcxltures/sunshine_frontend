@@ -5,10 +5,16 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    @apply bg-slate-50;
   }
 
   body {
-    @apply font-body text-slate-700 bg-navy-50 antialiased;
+    @apply font-body text-slate-700 bg-slate-50 antialiased;
+    line-height: 1.7;
+  }
+
+  p {
+    @apply text-slate-600;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -79,7 +85,7 @@
 
   /* ── Page header ── */
   .page-header {
-    @apply bg-navy-800 text-white py-12 sm:py-16;
+    @apply bg-white text-navy-900 py-14 sm:py-16 shadow-sm rounded-b-[2rem];
   }
 
   /* ── Table ── */

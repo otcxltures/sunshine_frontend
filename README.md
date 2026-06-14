@@ -1,16 +1,53 @@
-# React + Vite
+# Sunshine School Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite frontend for the Sunshine School course portal. This app provides public course browsing, student application flow, and admin management support.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Course listing and detail pages
+- Searchable and responsive course catalog
+- Student application workflow
+- Authentication-ready routes with protected pages
+- Admin dashboard for course and application management
+- Tailwind CSS styling with custom UI components
 
-## React Compiler
+### Install Dependencies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+``
 
-## Expanding the ESLint configuration
+### Run the App
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run dev
+```
+
+Then open the local development URL shown in the terminal.
+
+## Available Scripts
+
+- `npm run dev` — start the Vite development server
+- `npm run build` — create a production build
+- `npm run preview` — preview the production build locally
+- `npm test` — run tests once
+- `npm run test:watch` — run tests in watch mode
+- `npm run lint` — lint source files with ESLint
+
+
+## Notes
+
+- The app expects authenticated endpoints at `/auth/login`, `/auth/register`, and `/auth/me` if login is enabled.
+- Tailwind CSS is configured via `postcss.config.js` and `tailwind.config.js`.
+- Remove any temporary CDN or Firebase helpers if they are not part of your final setup.
+
+## Contributors
+* Enock Kibet 
+* Glenn Wahome
+* John King'oo
+* Immanuel Okoth
+* Emmanuel Torris
+
+## License
+
+This project is private and intended for internal use only.
