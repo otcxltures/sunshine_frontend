@@ -10,7 +10,8 @@ export default function Navbar() {
         <div className="flex gap-6 text-sm">
           <NavLink to="/" className="hover:text-amber-400">Home</NavLink>
           <NavLink to="/courses" className="hover:text-amber-400">Courses</NavLink>
-          <NavLink to="/apply" className="hover:text-amber-400">Apply</NavLink>
+          <NavLink to="/about" className="hover:text-amber-400">About</NavLink>
+          <NavLink to="/courses" className="hover:text-amber-400">Apply</NavLink>
           <NavLink to="/contact" className="hover:text-amber-400">Contact</NavLink>
           <NavLink to="/login" className="hover:text-amber-400">Login</NavLink>
         </div>
