@@ -24,7 +24,7 @@ export default function ManageAnnouncements(){
 
   const startEdit = (it)=>{ setEditingId(it.id); setTitle(it.title); setContent(it.content) }
   const cancel = ()=>{ setEditingId(null); setTitle(''); setContent('') }
-  const save = async ()=>{ const res = await updateAnnouncement(editingId,{ title, content, created_at: new Date().toISOString().slice(0,10) }); setItems(prev=>prev.map(i=>i.id===editingId?res.data:i)); cancel() }
+  const save = async (e)=>{ e.preventDefault(); const res = await updateAnnouncement(editingId,{ title, content, created_at: new Date().toISOString().slice(0,10) }); setItems(prev=>prev.map(i=>i.id===editingId?res.data:i)); cancel() }
   const remove = async (id)=>{ if(!confirm('Delete announcement?')) return; await deleteAnnouncement(id); setItems(prev=>prev.filter(i=>i.id!==id)) }
 
   if(loading) return <div className="flex justify-center py-12"><Spinner /></div>
@@ -33,11 +33,11 @@ export default function ManageAnnouncements(){
     <div className="section-wrapper py-12">
       <h1 className="font-display font-800 text-2xl mb-6">Manage Announcements</h1>
 
-      <form onSubmit={add} className="mb-6 max-w-2xl">
+      <form onSubmit={editingId ? save : add} className="mb-6 max-w-2xl">
         <input className="field-input mb-2" placeholder="Title" value={title} onChange={e=>setTitle(e.target.value)} required />
         <textarea className="field-textarea mb-2" placeholder="Content" value={content} onChange={e=>setContent(e.target.value)} required />
         <div className="flex gap-2">
-          <button className="btn-primary" type="submit">Add Announcement</button>
+          <button className="btn-primary" type="submit">{editingId ? 'Save Changes' : 'Add Announcement'}</button>
           {editingId && <button type="button" className="btn-secondary" onClick={cancel}>Cancel edit</button>}
         </div>
       </form>
