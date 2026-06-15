@@ -1,49 +1,76 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
-import api from '../services/api'
+import { auth } from '../firebase'
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut as firebaseSignOut,
+  onAuthStateChanged,
+} from 'firebase/auth'
 
 const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  const [user, setUser]       = useState(null)
-  const [token, setToken]     = useState(() => localStorage.getItem('ss_token'))
+  const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  // Fetch current user profile when token changes
   useEffect(() => {
-    if (!token) { setLoading(false); return }
-    api.get('/auth/me')
-      .then(res => setUser(res.data))
-      .catch(() => { localStorage.removeItem('ss_token'); setToken(null) })
-      .finally(() => setLoading(false))
-  }, [token])
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const token = await currentUser.getIdToken()
+        localStorage.setItem('ss_token', token)
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName || '',
+          photoURL: currentUser.photoURL || '',
+          isAnonymous: currentUser.isAnonymous,
+        })
+      } else {
+        localStorage.removeItem('ss_token')
+        setUser(null)
+      }
+      setLoading(false)
+    })
+
+    return unsubscribe
+  }, [])
 
   const login = useCallback(async (email, password) => {
-    // FastAPI OAuth2 form format
-    const params = new URLSearchParams()
-    params.append('username', email)
-    params.append('password', password)
-    const res = await api.post('/auth/login', params, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    const credential = await signInWithEmailAndPassword(auth, email, password)
+    const token = await credential.user.getIdToken()
+    localStorage.setItem('ss_token', token)
+    setUser({
+      uid: credential.user.uid,
+      email: credential.user.email,
+      displayName: credential.user.displayName || '',
+      photoURL: credential.user.photoURL || '',
+      isAnonymous: credential.user.isAnonymous,
     })
-    const { access_token } = res.data
-    localStorage.setItem('ss_token', access_token)
-    setToken(access_token)
   }, [])
 
-  const register = useCallback(async (payload) => {
-    await api.post('/auth/register', payload)
+  const register = useCallback(async (email, password) => {
+    const credential = await createUserWithEmailAndPassword(auth, email, password)
+    const token = await credential.user.getIdToken()
+    localStorage.setItem('ss_token', token)
+    setUser({
+      uid: credential.user.uid,
+      email: credential.user.email,
+      displayName: credential.user.displayName || '',
+      photoURL: credential.user.photoURL || '',
+      isAnonymous: credential.user.isAnonymous,
+    })
   }, [])
 
-  const logout = useCallback(() => {
+  const logout = useCallback(async () => {
+    await firebaseSignOut(auth)
     localStorage.removeItem('ss_token')
-    setToken(null)
     setUser(null)
   }, [])
 
-  const isAdmin = user?.role === 'admin'
+  const isAdmin = false
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, register, logout, isAdmin }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, isAdmin }}>
       {children}
     </AuthContext.Provider>
   )

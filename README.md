@@ -7,15 +7,25 @@ A React + Vite frontend for the Sunshine School course portal. This app provides
 - Course listing and detail pages
 - Searchable and responsive course catalog
 - Student application workflow
-- Authentication-ready routes with protected pages
-- Admin dashboard for course and application management
-- Tailwind CSS styling with custom UI components
+- Firebase login support via email/password
+- Admin pages protected by authentication
+- Tailwind CSS styling with custom layout components
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or compatible
+- npm 10+ (or yarn/pnpm equivalent)
+- A backend API for courses and application data
+- A Firebase project for authentication
 
 ### Install Dependencies
 
 ```bash
 npm install
-``
+```
+
 
 ### Run the App
 
@@ -34,19 +44,23 @@ Then open the local development URL shown in the terminal.
 - `npm run test:watch` — run tests in watch mode
 - `npm run lint` — lint source files with ESLint
 
+## Project Structure
+
+- `src/` — application source code
+  - `src/App.jsx` — route configuration
+  - `src/main.jsx` — app entry point
+  - `src/pages/` — page views
+  - `src/components/` — reusable UI components
+  - `src/context/` — auth and global state providers
+  - `src/services/` — API wrappers
+  - `src/firebase.js` — Firebase configuration
+  - `src/index.css` — Tailwind and layout styles
 
 ## Notes
 
-- The app expects authenticated endpoints at `/auth/login`, `/auth/register`, and `/auth/me` if login is enabled.
-- Tailwind CSS is configured via `postcss.config.js` and `tailwind.config.js`.
-- Remove any temporary CDN or Firebase helpers if they are not part of your final setup.
-
-## Contributors
-* Enock Kibet 
-* Glenn Wahome
-* John King'oo
-* Immanuel Okoth
-* Emmanuel Torris
+- Login now uses Firebase email/password authentication.
+- The app stores the Firebase ID token in `localStorage` as `ss_token`.
+- Protected routes use auth state from `AuthContext`.
 
 ## License
 
