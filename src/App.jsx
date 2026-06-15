@@ -19,6 +19,10 @@ import NotFound           from './pages/NotFound'
 import AdminDashboard          from './pages/admin/Dashboard'
 import AdminManageCourses      from './pages/admin/ManageCourses'
 import AdminManageApplications from './pages/admin/ManageApplications'
+import AdminManageAnnouncements from './pages/admin/ManageAnnouncements'
+import AdminSchoolInfo from './pages/admin/SchoolInfo'
+
+
 
 export default function App() {
   return (
@@ -43,6 +47,8 @@ export default function App() {
           <Route path="admin"                  element={<AdminDashboard />} />
           <Route path="admin/courses"          element={<AdminManageCourses />} />
           <Route path="admin/applications"     element={<AdminManageApplications />} />
+          <Route path="admin/announcements"   element={<AdminManageAnnouncements />} />
+          <Route path="admin/school-info"     element={<AdminSchoolInfo />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
