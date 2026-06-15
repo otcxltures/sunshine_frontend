@@ -9,7 +9,6 @@ import Courses            from './pages/Courses'
 import CourseDetail       from './pages/CourseDetail'
 import Apply              from './pages/Apply'
 import ApplicationStatus  from './pages/ApplicationStatus'
-import About              from './pages/About'
 import Contact            from './pages/Contact'
 import Login              from './pages/Login'
 import Register           from './pages/Register'
@@ -32,7 +31,6 @@ export default function App() {
         <Route index           element={<Home />} />
         <Route path="courses"  element={<Courses />} />
         <Route path="courses/:id" element={<CourseDetail />} />
-        <Route path="about"    element={<About />} />
         <Route path="contact"  element={<Contact />} />
         <Route path="login"    element={<Login />} />
         <Route path="register" element={<Register />} />

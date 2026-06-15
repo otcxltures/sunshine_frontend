@@ -1,16 +1,67 @@
-# React + Vite
+# Sunshine School Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React + Vite frontend for the Sunshine School course portal. This app provides public course browsing, student application flow, and admin management support.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Course listing and detail pages
+- Searchable and responsive course catalog
+- Student application workflow
+- Firebase login support via email/password
+- Admin pages protected by authentication
+- Tailwind CSS styling with custom layout components
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js 18+ or compatible
+- npm 10+ (or yarn/pnpm equivalent)
+- A backend API for courses and application data
+- A Firebase project for authentication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Install Dependencies
+
+```bash
+npm install
+```
+
+
+### Run the App
+
+```bash
+npm run dev
+```
+
+Then open the local development URL shown in the terminal.
+
+## Available Scripts
+
+- `npm run dev` — start the Vite development server
+- `npm run build` — create a production build
+- `npm run preview` — preview the production build locally
+- `npm test` — run tests once
+- `npm run test:watch` — run tests in watch mode
+- `npm run lint` — lint source files with ESLint
+
+## Project Structure
+
+- `src/` — application source code
+  - `src/App.jsx` — route configuration
+  - `src/main.jsx` — app entry point
+  - `src/pages/` — page views
+  - `src/components/` — reusable UI components
+  - `src/context/` — auth and global state providers
+  - `src/services/` — API wrappers
+  - `src/firebase.js` — Firebase configuration
+  - `src/index.css` — Tailwind and layout styles
+
+## Notes
+
+- Login now uses Firebase email/password authentication.
+- The app stores the Firebase ID token in `localStorage` as `ss_token`.
+- Protected routes use auth state from `AuthContext`.
+
+## License
+
+This project is private and intended for internal use only.
