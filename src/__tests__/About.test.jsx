@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import About from '../pages/About'
-import { vi } from 'vitest'
+import { expect, test, vi } from 'vitest'
 
 vi.mock('../services/schoolinfo', () => ({ getSchoolInfo: () => Promise.resolve({ data: { about: 'Test about', mission: 'Test mission', achievements: 'A;B' } }) }))
 

@@ -3,7 +3,6 @@ import { getSchoolInfo, updateSchoolInfo } from '../../services/schoolinfo'
 import Spinner from '../../components/ui/Spinner'
 
 export default function SchoolInfoAdmin(){
-  const [info, setInfo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [about, setAbout] = useState('')
   const [mission, setMission] = useState('')
@@ -11,12 +10,11 @@ export default function SchoolInfoAdmin(){
 
   useEffect(()=>{
     setLoading(true)
-    getSchoolInfo().then(r=>{ setInfo(r.data); setAbout(r.data.about||''); setMission(r.data.mission||''); setAchievements(r.data.achievements||'') }).finally(()=>setLoading(false))
+    getSchoolInfo().then(r=>{ setAbout(r.data.about||''); setMission(r.data.mission||''); setAchievements(r.data.achievements||'') }).finally(()=>setLoading(false))
   },[])
 
   const save = async ()=>{
-    const res = await updateSchoolInfo({ about, mission, achievements })
-    setInfo(res.data)
+    await updateSchoolInfo({ about, mission, achievements })
     alert('Saved')
   }
 

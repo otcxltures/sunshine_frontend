@@ -3,17 +3,23 @@ import { getSchoolInfo } from '../services/schoolinfo'
 
 export default function About() {
   const [info, setInfo] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  useEffect(()=>{
-    getSchoolInfo().then(r=>setInfo(r.data)).catch(()=>setInfo(null))
-  },[])
+  useEffect(() => {
+    getSchoolInfo()
+      .then(r => setInfo(r.data))
+      .catch(() => setInfo({}))
+      .finally(() => setLoading(false))
+  }, [])
 
-  if(!info) return (
+  if (loading) return (
     <div className="section-wrapper py-12">
       <h1 className="font-display font-800 text-2xl mb-4">About Sunshine School</h1>
       <p className="text-slate-700">Loading...</p>
     </div>
   )
+
+  const data = info || {}
 
   return (
     <div className="section-wrapper py-12">
@@ -21,14 +27,18 @@ export default function About() {
 
       <section className="mb-8">
         <h2 className="font-display font-700 text-xl mb-2">Our Story</h2>
-        <p className="text-slate-700 mb-2">{info.about}</p>
+        <p className="text-slate-700 mb-2">
+          {data.about || 'Sunshine School is a leading institution in Nairobi offering practical, career-focused programmes.'}
+        </p>
         <p className="text-slate-600 text-sm">Founded: 2010 · Location: Nairobi · Accreditation: National Council of Higher Education</p>
       </section>
 
       <section className="mb-8 grid md:grid-cols-2 gap-6">
         <div>
           <h3 className="font-display font-700 text-lg mb-2">Our Mission</h3>
-          <p className="text-slate-700">{info.mission}</p>
+          <p className="text-slate-700">
+            {data.mission || 'To equip students with the skills and knowledge to thrive in a competitive world.'}
+          </p>
         </div>
 
         <div>
@@ -60,7 +70,7 @@ export default function About() {
       <section className="mb-8">
         <h3 className="font-display font-700 text-lg mb-2">Key Achievements</h3>
         <ul className="list-disc ml-5 space-y-2 text-slate-700">
-          {info.achievements ? info.achievements.split(';').map((a,i)=> <li key={i}>{a.trim()}</li>) : (
+          {data.achievements ? data.achievements.split(';').map((a, i) => <li key={i}>{a.trim()}</li>) : (
             <>
               <li>Graduated over 2,000 students with strong placement rates.</li>
               <li>Launched partnerships with local employers for internships.</li>
