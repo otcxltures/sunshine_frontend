@@ -1,13 +1,15 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
 
+import { initializeApp } from "firebase/app";
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-}
+  apiKey: "AIzaSyDblZm-ZF6BcHqMBs2tL02n8Nuy4HHDcE4",
+  authDomain: "sunshinefrontend.firebaseapp.com",
+  projectId: "sunshinefrontend",
+  storageBucket: "sunshinefrontend.firebasestorage.app",
+  messagingSenderId: "961348055027",
+  appId: "1:961348055027:web:406a2078800f439a98ec86"
+};
 
-const app = initializeApp(firebaseConfig)
-export const auth = getAuth(app)
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);

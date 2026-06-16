@@ -14,6 +14,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@dataconnect/generated": "file:src/dataconnect-generated",
     "axios": "^1.7.2",
     "firebase": "^12.14.0",
     "lucide-react": "^0.383.0",
