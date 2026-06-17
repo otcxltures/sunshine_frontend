@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://your-render-backend-url.com',
+  baseURL: import.meta.env.VITE_API_URL || 'https://sunshine-backend-1lsa.onrender.com/',
   headers: {
     'Content-Type': 'application/json'
   }
